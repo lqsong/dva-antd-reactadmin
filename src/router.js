@@ -1,11 +1,13 @@
 import React from 'react';
-import {  Router, Route, Switch } from 'dva/router';
+import {  routerRedux, Route, Switch } from 'dva/router';
 import dynamic from 'dva/dynamic';
 import routes from './routes/index';
 
+const { ConnectedRouter } = routerRedux;
+
 function RouterConfig({ history, app }) {
   return (
-    <Router history={history}>
+    <ConnectedRouter history={history}>
       <Switch>
         {          
           routes.map(({path, name, layout, models, component}) => {
@@ -36,7 +38,7 @@ function RouterConfig({ history, app }) {
           })
         }
       </Switch>
-    </Router>
+    </ConnectedRouter>
   );
 }
 
