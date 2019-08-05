@@ -4,6 +4,7 @@ import { Link } from 'dva/router';
 import { RouteWithSubRoutes } from '@/utils/core';
 
 import { Layout, Menu, Icon } from 'antd';
+import style from './index.less';
 const { Header, Sider, Content } = Layout;
 
 class BaseLayout extends React.Component {
@@ -20,7 +21,7 @@ class BaseLayout extends React.Component {
       return (
         <Layout id="lqs-base-layout">
           <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-            <div className="logo" />
+            <div className={style.logo} />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
               <Menu.Item key="1">
                 <Link to="/base/home">
@@ -45,7 +46,7 @@ class BaseLayout extends React.Component {
           <Layout>
             <Header style={{ background: '#fff', padding: 0 }}>
               <Icon
-                className="trigger"
+                className={style.trigger}
                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={this.toggle}
               />
