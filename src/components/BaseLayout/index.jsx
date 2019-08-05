@@ -1,21 +1,16 @@
 import React from 'react';
-import { Route, Switch } from 'dva/router';
 import {connect} from 'dva';
-import IndexPage from '../../routes/IndexPage';
-import Products from '../../routes/Products';
+import { Route } from 'dva/router';
 
-const BaseLayout = ({match}) => {
+const BaseLayout = ({component: Component, ...props}) => {
   return (
-    <div>
-        <div> header</div>
-        <div>
-        <Switch>
-            <Route path={match.path} exact component={IndexPage} />
-            <Route path='/productss' exact component={Products} />
-        </Switch>
-        </div>
-        <div>footer</div>
-    </div>
+    <Route {...props} render={matchProps => (
+      <div className="DefaultLayout">
+        <div className="Header">Header</div>
+          <Component {...matchProps} />
+        <div className="Footer">Footer</div>
+      </div>
+    )} />
   );
 };
 
