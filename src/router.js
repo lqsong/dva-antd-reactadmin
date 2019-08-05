@@ -1,7 +1,8 @@
 import React from 'react';
-import {  routerRedux, Route, Switch } from 'dva/router';
-import dynamic from 'dva/dynamic';
-import routes from './routes/index';
+import { routerRedux, Switch, Route, Redirect } from 'dva/router';
+import { RouteWithSubRoutes } from '@/utils/core';
+import Page404 from '@/routes/single-page/404';
+import routes from '@/routes/index';
 
 const { ConnectedRouter } = routerRedux;
 
@@ -9,34 +10,18 @@ function RouterConfig({ history, app }) {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        {          
-          routes.map(({path, name, layout, models, component}) => {
-            const Component = dynamic({app, models, component});
-            if (layout) {
-              const Layout = layout;
-              return (
-                <Layout 
-                    path={path} 
-                    key={name} 
-                    exact
-                    component={Component}
-                />
-            );
-            }
-            return (
-              <Route 
-                  path={path} 
-                  key={name} 
-                  exact
-                  render={
-                    (props) => {
-                      return (<Component {...props} />);
-                    }
-                  }
-              />
-            );
-          })
+        <Route exact path="/" render={
+          () => (<Redirect to="/base/home"/>)
+        }/>
+        <Route exact path="/base" render={
+          () => (<Redirect to="/base/home"/>)
+        }/>        
+        {
+          routes.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))
         }
+        <Route component={Page404} />
       </Switch>
     </ConnectedRouter>
   );
