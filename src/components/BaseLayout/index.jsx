@@ -13,6 +13,7 @@ class BaseLayout extends React.Component {
       siderWidth: 200,
       collapsed: false
     };
+
     toggle = () => {
       this.setState({
         collapsed: !this.state.collapsed,
@@ -58,6 +59,12 @@ class BaseLayout extends React.Component {
                 <Link to="/base/users/list">
                   <Icon type="upload" />
                   <span>用户列表</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="4">
+                <Link to="/base/products/list">
+                  <Icon type="upload" />
+                  <span>产品列表</span>
                 </Link>
               </Menu.Item>
             </Menu>

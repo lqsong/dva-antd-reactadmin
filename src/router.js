@@ -17,8 +17,8 @@ function RouterConfig({ history, app }) {
           () => (<Redirect to="/base/home"/>)
         }/>        
         {
-          routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} />
+          routes(app).map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} app={app} />
           ))
         }
         <Route component={Page404} />

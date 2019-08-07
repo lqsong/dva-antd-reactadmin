@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import ProductsList from '../../components/ProductsList';
+import ProductsList from '@/routes/products/components/ProductsList';
 
 const Products = ({ dispatch, products }) => {
     function handleDelete (id) {
@@ -9,8 +9,7 @@ const Products = ({ dispatch, products }) => {
             payload: id
         });
     }
-
-    return (
+    return (        
         <div>
             <h2>List of Prodeucts</h2>
             <ProductsList onDelete={handleDelete} products={products} />
@@ -18,4 +17,11 @@ const Products = ({ dispatch, products }) => {
     );
 };
 
-export default connect(({ products }) => ({ products: products.productTList }))(Products);
+/* function mapStateToProps({products}) {
+    return { products: products.productTList };
+} */
+
+function mapStateToProps(state) {
+    return { products: state.products.productTList };
+}
+export default connect(mapStateToProps)(Products);
