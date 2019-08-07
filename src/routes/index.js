@@ -1,7 +1,13 @@
+/**
+ * 路由配置、菜单配置
+ * @author liqingsong<957698457@qq.com>
+ * @weburl http://www.liqingsong.cc 
+ *         http://www.wyxgn.com
+ */
 import dynamic from 'dva/dynamic';
 import BaseLayout from '@/components/BaseLayout/';
 import EmptyLayout from '@/components/EmptyLayout/';
-import Page404 from '@/routes/single-page/404';
+import Page404 from '@/routes/single-page/404/index';
 // import Login from '@/routes/login/index';
 // import HomeIndex from '@/routes/home/index';
 // import UsersList from '@/routes/users/list';
@@ -36,7 +42,7 @@ export default (app) => {
                 {
                   path: "/base/users/list",
                   // component: UsersList
-                  component: appBool ? dynamic({app, component: () => import('@/routes/users/list'), models:()=>[import('@/routes/users/models')] }) : ''
+                  component: appBool ? dynamic({app, component: () => import('@/routes/users/list'), models:()=>[import('@/routes/users/models/index')] }) : ''
                 },
                 {
                   path: "/base/users/add",
@@ -51,7 +57,7 @@ export default (app) => {
               routes: [
                 {
                   path: "/base/products/list",
-                  component: appBool ? dynamic({app, component: () => import('@/routes/products/index'), models:()=>[import('@/routes/products/models')] }) : ''
+                  component: appBool ? dynamic({app, component: () => import('@/routes/products/index'), models:()=>[import('@/routes/products/models/index')] }) : ''
                 }
               ]
             }

@@ -1,3 +1,9 @@
+/**
+ * 用户添加
+ * @author liqingsong<957698457@qq.com>
+ * @weburl http://www.liqingsong.cc 
+ *         http://www.wyxgn.com
+ */
 import React, { Component } from 'react';
 import { connect } from 'dva';
 
