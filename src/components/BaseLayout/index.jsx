@@ -9,9 +9,10 @@ import {connect} from 'dva';
 import { Link } from 'dva/router';
 import { RouteWithSubRoutes } from '@/utils/core';
 
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu,  Breadcrumb, Icon } from 'antd';
 import style from './index.less';
 const { Header, Sider, Content, Footer } = Layout;
+const { SubMenu } = Menu;
 
 class BaseLayout extends React.Component {
     state = {
@@ -55,24 +56,28 @@ class BaseLayout extends React.Component {
                     <span>首页</span>
                 </Link>
               </Menu.Item>
-              <Menu.Item key="2">
-                <Link to="/base/users/add">
-                  <Icon type="video-camera" />
-                  <span>用户添加</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Link to="/base/users/list">
-                  <Icon type="upload" />
-                  <span>用户列表</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Link to="/base/products/list">
-                  <Icon type="upload" />
-                  <span>产品列表</span>
-                </Link>
-              </Menu.Item>
+              <SubMenu title={
+                    <span>
+                      <Icon type="appstore" />
+                      <span>自定义</span>
+                    </span>
+                  }>
+                  <Menu.Item key="2">
+                    <Link to="/base/users/add">
+                      <span>用户添加</span>
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key="3">
+                    <Link to="/base/users/list">
+                      <span>用户列表</span>
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key="4">
+                    <Link to="/base/products/list">
+                      <span>产品列表</span>
+                    </Link>
+                  </Menu.Item>
+              </SubMenu>
             </Menu>
           </Sider>
           <Layout style={{  minHeight: '100vh', paddingLeft }}>
