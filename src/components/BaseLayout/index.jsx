@@ -4,23 +4,35 @@
  * @weburl http://www.liqingsong.cc 
  *         http://www.wyxgn.com
  */
-import React from 'react';
-import {connect} from 'dva';
-import { Link } from 'dva/router';
+import React, { Component } from 'react';
+import { connect } from 'dva';
+import style from './index.less';
+
 import { RouteWithSubRoutes } from '@/utils/core';
 
-import { Layout, Menu,  Breadcrumb, Icon } from 'antd';
-import style from './index.less';
+import SideMenu from '@/components/BaseLayout/components/SideMenu';
+
+import { Layout,  Breadcrumb, Icon } from 'antd';
 const { Header, Sider, Content, Footer } = Layout;
-const { SubMenu } = Menu;
 
-class BaseLayout extends React.Component {
-    state = {
-      collapsedWidth: 80,
-      siderWidth: 200,
-      collapsed: false
-    };
+class BaseLayout extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+          collapsedWidth: 80,
+          siderWidth: 200,
+          collapsed: false
+        };
+    }
+
+    // 在第一次渲染后调用，只在客户端。
+    componentDidMount() {
+      this.props.dispatch({type: 'baselayout/getMenu'}); //设置导航
+      // console.log(this.props.baselayout.menulist);
+    }
+ 
     toggle = () => {
       this.setState({
         collapsed: !this.state.collapsed,
@@ -36,6 +48,7 @@ class BaseLayout extends React.Component {
       const { collapsedWidth, siderWidth, collapsed  } = this.state;
       return collapsed ? `${collapsedWidth}px` : `${siderWidth}px`;
     }
+
   
     render() {
       const width = this.getHeadWidth();
@@ -49,36 +62,7 @@ class BaseLayout extends React.Component {
               left: 0,
             }}>
             <div className={style.logo} />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-              <Menu.Item key="1">
-                <Link to="/base/home">
-                    <Icon type="user" />
-                    <span>首页</span>
-                </Link>
-              </Menu.Item>
-              <SubMenu title={
-                    <span>
-                      <Icon type="appstore" />
-                      <span>自定义</span>
-                    </span>
-                  }>
-                  <Menu.Item key="2">
-                    <Link to="/base/users/add">
-                      <span>用户添加</span>
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key="3">
-                    <Link to="/base/users/list">
-                      <span>用户列表</span>
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key="4">
-                    <Link to="/base/products/list">
-                      <span>产品列表</span>
-                    </Link>
-                  </Menu.Item>
-              </SubMenu>
-            </Menu>
+            <SideMenu item={this.props.baselayout.menulist} />
           </Sider>
           <Layout style={{  minHeight: '100vh', paddingLeft }}>
             <Header style={{ background: '#fff', padding: 0, zIndex: 2, width }} className={style.headerfixed}>
@@ -109,4 +93,8 @@ class BaseLayout extends React.Component {
 BaseLayout.propTypes = {
 };
 
-export default connect()(BaseLayout);
+function mapStateToProps({ baselayout }) {
+  return { baselayout };
+}
+
+export default connect(mapStateToProps)(BaseLayout);
