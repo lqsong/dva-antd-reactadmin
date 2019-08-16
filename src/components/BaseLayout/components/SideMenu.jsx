@@ -7,7 +7,7 @@ import { Menu, Icon } from 'antd';
 const { SubMenu } = Menu;
 
 const SubMenuItem = (itemList) => {    
-    let list = itemList['routes'].map((item) => {
+   /*  let list = itemList['routes'].map((item) => {
             return (  
                     <Menu.Item key={item.path}>
                         <Link to={item.path}>
@@ -15,35 +15,34 @@ const SubMenuItem = (itemList) => {
                         </Link>
                     </Menu.Item>
             );
-    });
-
+    }); */
+    let list = SideMenuItem(itemList['routes']);    
+    let icon = itemList.icon ? <Icon type={itemList.icon} />: '';
     return (
         <SubMenu key={itemList.path} title={
             <span>
-                <Icon type={itemList.icon} />
+                { icon }
                 <span>{itemList.meta.title}</span>
             </span>
             }>
-         {
-             list
-         }
+            { list }
        </SubMenu> 
-)
+    );
 
 };
 
-const SideMenuItem = (itemList) => {
-    
+const SideMenuItem = (itemList) => {    
     return itemList.map( (item) => {
         if (item.routes && item.routes.length === 1) { //只有 一个子菜单
 
             if (showChildRoutes(item)) { // 有子菜单 并且（有多个子菜单 或 显示下级）
                 return SubMenuItem(item);
              } else {
+                let icon = item.routes[0].icon ? <Icon type={item.routes[0].icon} />: '';
                  return (  
                      <Menu.Item key={item.routes[0].path}>
                          <Link to={item.routes[0].path}>
-                             <Icon type={item.routes[0].icon} />
+                             { icon }
                              <span>{item.routes[0].meta.title}</span>
                          </Link>
                      </Menu.Item>
@@ -55,16 +54,17 @@ const SideMenuItem = (itemList) => {
             if (showChildRoutes(item)) { // 有子菜单 并且（有多个子菜单 或 显示下级）
                return SubMenuItem(item);
             } else {
-                return (  
+                let icon = item.icon ? <Icon type={item.icon} />: '';
+                return ( 
                     <Menu.Item key={item.path}>
                         <Link to={item.path}>
-                            <Icon type={item.icon} />
+                            { icon }
                             <span>{item.meta.title}</span>
                         </Link>
                     </Menu.Item>
                 );
             }
-    }
+        }
     })    
 };
 

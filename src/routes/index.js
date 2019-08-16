@@ -79,6 +79,27 @@ export default (app) => {
                     access: ['admin']                
                   },
                   component: appBool ? dynamic({app, component: () => import('@/routes/users/add'), models:()=>[] }) : ''
+                },
+                {
+                  path: "/base/products",
+                  meta: {                
+                    title: '产品样例',
+                    hideInMenu: false, 
+                    showAlways: true,               
+                    access: ['admin']                
+                  },
+                  component: appBool ? EmptyLayout : '',
+                  routes: [
+                    {
+                      path: "/base/products/list",
+                      meta: {                
+                        title: '产品列表',
+                        hideInMenu: false,                                   
+                        access: ['admin']                
+                      },
+                      component: appBool ? dynamic({app, component: () => import('@/routes/products/index'), models:()=>[import('@/routes/products/models/index')] }) : ''
+                    }
+                  ]
                 }
               ]
             },
@@ -87,7 +108,8 @@ export default (app) => {
               meta: {                
                 title: '产品样例',
                 icon: 'user',
-                hideInMenu: false,                
+                hideInMenu: false, 
+                showAlways: false,               
                 access: ['admin']                
               },
               component: appBool ? EmptyLayout : '',
