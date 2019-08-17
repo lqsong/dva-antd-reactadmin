@@ -9,11 +9,14 @@ export default {
     namespace: 'global',
 
     state: {
-        abc: {}
+        pathname: '/base/home',
     },
 
     subscriptions: {
         setup({ dispatch, history }) {  // eslint-disable-line
+            return history.listen(({pathname}) => {
+                dispatch({type: 'save', payload: { pathname }});
+            })
         },
     },
 
@@ -27,6 +30,9 @@ export default {
         save(state, action) {
             return { ...state, ...action.payload };
         },
+        setState(state, {payload}) {
+            return Object.assign({}, state, {...payload});
+        }
     },
 
 }

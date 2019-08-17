@@ -21,7 +21,7 @@ npm run build
 ```
 
 ## Question
-##### 引入dva后一直存在一个 Warning: Please use `require("history").createHashHistory` instead of `require("history/createHashHistory")`. Support for the latter will be removed in the next major release.
+##### 1、引入dva后一直存在一个 Warning: Please use `require("history").createHashHistory` instead of `require("history/createHashHistory")`. Support for the latter will be removed in the next major release.
 - 找到node_modules中的dva包
 - 修改lib/index.js
 ```

@@ -31,6 +31,7 @@ class BaseLayout extends Component {
     componentDidMount() {
       this.props.dispatch({type: 'baselayout/getMenu'}); //设置导航
       // console.log(this.props.baselayout.menulist);
+      // console.log(this.props);
     }
  
     toggle = () => {
@@ -62,7 +63,7 @@ class BaseLayout extends Component {
               left: 0,
             }}>
             <div className={style.logo} />
-            <SideMenu item={this.props.baselayout.menulist} />
+            <SideMenu item={this.props.baselayout.menulist} pathname={this.props.global.pathname} />
           </Sider>
           <Layout style={{  minHeight: '100vh', paddingLeft }}>
             <Header style={{ background: '#fff', padding: 0, zIndex: 2, width }} className={style.headerfixed}>
@@ -93,8 +94,8 @@ class BaseLayout extends Component {
 BaseLayout.propTypes = {
 };
 
-function mapStateToProps({ baselayout }) {
-  return { baselayout };
+function mapStateToProps({ global, baselayout }) {
+  return { global, baselayout };
 }
 
 export default connect(mapStateToProps)(BaseLayout);

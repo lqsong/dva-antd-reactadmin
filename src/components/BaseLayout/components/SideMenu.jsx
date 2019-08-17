@@ -68,13 +68,13 @@ const SideMenuItem = (itemList) => {
     })    
 };
 
-const SideMenu = ({ item }) => {
+const SideMenu = ({ item, pathname }) => {
    
     if (!item) {
         return (<span></span>);
     }
     return (
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
             {
                SideMenuItem(item)
             }            
